@@ -1,0 +1,27 @@
+<mat-card>
+<div>
+    <h1>Detalhes Usuário</h1>
+</div>
+
+<div *ngIf="usuario">
+    <form>
+        <div class="input_box">
+            <mat-form-field>
+            <mat-label>Login:</mat-label>
+            <input matInput type="text" value="{{usuario.login}}" disabled/>
+            </mat-form-field>
+        </div>
+
+        <div class="input_box">
+            <mat-form-field>
+            <mat-label>Senha:</mat-label>
+           <input matInput type="password" value="{{usuario.senha}}" disabled />
+           </mat-form-field>
+        </div>
+
+        <div class="btn-box">
+            <button routerLink="" mat-raised-button color="warn">Voltar</button>
+        </div>
+    </form>
+</div>
+</mat-card>

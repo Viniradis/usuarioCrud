@@ -1,0 +1,43 @@
+<mat-card>
+  <h1>{{ btnTitulo }}</h1>
+
+  <form [formGroup]="usuarioForm" (ngSubmit)="submit()" #formDit="ngForm">
+    <input type="hidden" formControlName="id">
+
+    <div class="input_box">
+      <mat-form-field>
+        <mat-label>Login</mat-label>
+        <input matInput type="text" formControlName="login" placeholder="Digite seu login" required>
+      </mat-form-field>
+    </div>
+
+    <div class="input_box">
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Senha</mat-label>
+        <input
+          matInput
+          [type]="mostrarSenha ? 'text' : 'password'"
+          formControlName="senha"
+          placeholder="Digite a senha"
+          required
+        >
+        <button mat-icon-button matSuffix type="button" (click)="toggleSenha()">
+          <mat-icon>{{ mostrarSenha ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <!-- Mensagem de validação dinâmica -->
+      <div *ngIf="senha?.touched && senha?.invalid" class="mensagem-erro">
+        <small *ngIf="senha?.errors?.['required']">A senha é obrigatória.</small>
+        <small *ngIf="senha?.errors?.['pattern']">
+          A senha deve ter no mínimo 8 caracteres, incluindo letra maiúscula, minúscula, número e caractere especial.
+        </small>
+      </div>
+    </div>
+
+    <div class="btn-box">
+      <button type="submit" [disabled]="!usuarioForm.valid" mat-raised-button color="accent">{{ btnAcao }}</button>
+      <button routerLink="" mat-raised-button>Voltar</button>
+    </div>
+  </form>
+</mat-card>

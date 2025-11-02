@@ -1,0 +1,15 @@
+<mat-card>
+<div *ngIf="usuario">
+    <h1 style="text-align: center;">Deseja confirmar a exclusão?</h1>
+    <div>
+        <h2 style="font-style: bold;">Usuário</h2>
+        <p>{{usuario.id}}</p>
+        <p>{{usuario.login}}</p>
+        <p>{{usuario.senha}}</p>
+        <div>
+            <button mat-raised-button color="warn" (click)="Excluir()">Confirmar Exclusão</button>
+            <button mat-raised-button (click)="Cancelar()">Voltar</button>
+        </div>
+    </div>
+</div>
+</mat-card>

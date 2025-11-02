@@ -1,0 +1,86 @@
+<mat-card>
+<div class="usuario-box">
+    <button routerLink="/cadastro" mat-raised-button color="primary">Cadastrar novo usuário</button>
+    <div class="input_box">
+        <mat-form-field>
+        <mat-label>Procurar:</mat-label>
+        <input matInput type="text" placeholder="Qual usuário está buscando?" (input)="search($event)">
+        </mat-form-field>
+    </div>
+</div>
+
+<table mat-table [dataSource]="usuarios" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="ID">
+    <th mat-header-cell *matHeaderCellDef>ID</th>
+    <td mat-cell *matCellDef="let usuario"> {{usuario.id}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Login">
+    <th mat-header-cell *matHeaderCellDef>Login</th>
+    <td mat-cell *matCellDef="let usuario"> {{usuario.login}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Senha">
+  <th mat-header-cell *matHeaderCellDef>Senha</th>
+  <td mat-cell *matCellDef="let usuario">
+    <mat-form-field appearance="outline" style="width: 150px;">
+      <input matInput [type]="usuario.mostrarSenha ? 'text' : 'password'" [value]="usuario.senha" readonly>
+      <button mat-icon-button matSuffix (click)="toggleSenha(usuario)" type="button">
+        <mat-icon>{{ usuario.mostrarSenha ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
+    </mat-form-field>
+  </td>
+</ng-container>
+
+  <!--<ng-container matColumnDef="Senha">
+    <th mat-header-cell *matHeaderCellDef>Senha</th>
+    <td mat-cell *matCellDef="let usuario"> {{usuario.senha}} </td>
+  </ng-container>-->
+
+  <ng-container matColumnDef="Ações">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let usuario"> 
+           <button routerLink="/editar/{{usuario.id}}" mat-raised-button color="accent">Editar</button>
+                <button routerLink="/detalhes/{{usuario.id}}" mat-raised-button>Detalhes</button>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Excluir">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let usuario"> 
+        <button mat-raised-button color="warn" (click)="OpenDialog(usuario.id)">Excluir</button>
+    </td>
+  </ng-container>
+
+
+
+  <tr mat-header-row *matHeaderRowDef="colunas"></tr>
+  <tr mat-row *matRowDef="let row; columns: colunas;"></tr>
+</table>
+</mat-card>
+
+
+<!--<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Login</th>
+            <th>Senha</th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let usuario of usuarios">
+        <tr>
+            <td>{{usuario.id}}</td>
+            <td>{{usuario.login}}</td>
+            <td>{{usuario.senha}}</td>
+            <td>
+                <button routerLink="/editar/{{usuario.id}}">Editar</button>
+                <button routerLink="/detalhes/{{usuario.id}}">Detalhes</button>
+            </td>
+            <td>
+                <button>Excluir</button>
+            </td>
+        </tr>
+    </tbody>
+</table>-->
